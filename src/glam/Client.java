@@ -3,6 +3,14 @@ package glam;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
@@ -13,18 +21,29 @@ public class Client {
 
 	protected Shell shell;
 	private Text text;
+	
+	static InputStreamReader ISR = new InputStreamReader(System.in);
+	static BufferedReader BR = new BufferedReader(ISR);
 
 	/**
 	 * Launch the application.
 	 * @param args
+	 * @throws IOException 
+	 * @throws UnknownHostException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnknownHostException, IOException {
+		
+		Socket s =new Socket("localhost", 9999);
+		PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+		
 		try {
 			Client window = new Client();
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		s.close();
 	}
 
 	/**
@@ -55,14 +74,19 @@ public class Client {
 		
 		Label lblNome = new Label(shell, SWT.NONE);
 		lblNome.setAlignment(SWT.CENTER);
-		lblNome.setBounds(10, 20, 76, 15);
+		lblNome.setBounds(10, 35, 76, 15);
 		lblNome.setText("Nome");
 		
 		Button btnIscriviti = new Button(shell, SWT.NONE);
 		btnIscriviti.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				
+				String nome = text.getText();
 				if(text.getText()!=" "){
+					nome= getInput();
+					
+					
 					
 				}
 			}
@@ -75,5 +99,14 @@ public class Client {
 		lblRisultato.setBounds(134, 20, 108, 107);
 		lblRisultato.setText(" ");
 		
+	}
+	
+	private static String getInput(){
+		try {
+			return BR.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
