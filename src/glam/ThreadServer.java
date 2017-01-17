@@ -1,8 +1,13 @@
 package glam;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class ThreadServer implements Runnable {
 	Server s;
@@ -12,14 +17,18 @@ public class ThreadServer implements Runnable {
 		// TODO Auto-generated constructor stub
 		s = server;
 	}
-
+	
 	@Override
 	public void run() {
 		try {
 			server = new ServerSocket(9999);
 			while (true) {				
+				
 				Socket clientSocket = server.accept(); // Accetta la connessione
-				System.out.println("Server: Ho ricevuto il nome " + clientSocket.getInputStream().read());
+				InputStreamReader isr = new InputStreamReader(clientSocket.getInputStream());
+				BufferedReader in = new BufferedReader(isr);
+				System.out.println("ho ricevuto: "+ in.readLine());
+				//connectionDatabase();
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -28,4 +37,5 @@ public class ThreadServer implements Runnable {
 		
 	}
 
+	
 }
