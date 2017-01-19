@@ -19,6 +19,7 @@ public class ThreadServer implements Runnable {
 	public ThreadServer(Server server) {
 		// TODO Auto-generated constructor stub
 		s = server;
+		
 	}
 	
 	@Override
@@ -34,7 +35,7 @@ public class ThreadServer implements Runnable {
 				nome = in.readLine();
 				System.out.println("ho ricevuto: "+ nome);
 				dt.inserisciIscrizione(nome);
-				
+				s.aggiornaLista(dt.iscritto);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
