@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ThreadServer implements Runnable {
+	
+	String nome;
 	Server s;
 	ServerSocket server = null;
 	Socket client = null;
@@ -28,8 +30,10 @@ public class ThreadServer implements Runnable {
 				Socket clientSocket = server.accept(); // Accetta la connessione
 				InputStreamReader isr = new InputStreamReader(clientSocket.getInputStream());
 				BufferedReader in = new BufferedReader(isr);
-				System.out.println("ho ricevuto: "+ in.readLine());
-				dt.inserisciIscrizione(in.readLine());
+				nome = in.readLine();
+				System.out.println("ho ricevuto: "+ nome);
+				dt.inserisciIscrizione(nome);
+				
 				//connectionDatabase();
 			}
 		} catch (IOException e) {
@@ -38,6 +42,4 @@ public class ThreadServer implements Runnable {
 		}
 		
 	}
-
-	
 }
