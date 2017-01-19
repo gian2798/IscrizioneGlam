@@ -8,12 +8,11 @@ public class Database {
 	static Statement st;
 	static ResultSet rs;
 	static String sql;
-	static ArrayList<Iscritto> iscritto = new ArrayList();
+	public static ArrayList<Iscritto> iscritto = new ArrayList();
 	static Iscritto iscr;
 	
 	public static void Database(String[] args) throws SQLException {
 		
-		// ________________________________connessione
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -25,7 +24,7 @@ public class Database {
 		cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/glam?user=root&password=");
 		// peer è il nome del database
 
-		sql = "SELECT * FROM iscrizioni;";
+		sql = "SELECT nome FROM iscrizioni;";
 		// ________________________________query
 		try {
 			st = cn.createStatement(); // creo sempre uno statement sulla
@@ -33,6 +32,7 @@ public class Database {
 			rs = st.executeQuery(sql); // faccio la query su uno statement
 			while (rs.next() == true) {
 				iscr = new Iscritto(rs.getString("nome") +"\t" + rs.getString("data_iscrizione"), null);
+				iscritto.add(iscr);
 				System.out.println(rs.getString("id") + "\t" + rs.getString("idTutor"));
 			}
 		} catch (SQLException e) {

@@ -3,6 +3,9 @@ package glam;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.List;
+
+import java.util.ArrayList;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
@@ -12,6 +15,7 @@ import org.eclipse.swt.events.SelectionEvent;
 
 public class Server {
 	protected Shell shell;
+	private List list;
 
 	/**
 	 * Launch the application.
@@ -29,6 +33,13 @@ public class Server {
 	/**
 	 * Open the window.
 	 */
+	public void aggiornaLista(ArrayList<Iscritto> iscritti){
+		list.removeAll();
+		for(int i=0; i<iscritti.size(); i++){
+			list.add(iscritti.get(i).getNome());
+		}
+				
+	}
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
@@ -49,7 +60,7 @@ public class Server {
 		shell.setSize(450, 300);
 		shell.setText("SWT Application");
 		
-		List list = new List(shell, SWT.BORDER);
+		list = new List(shell, SWT.BORDER);
 		list.setBounds(10, 33, 189, 219);
 		
 		Label lblLista = new Label(shell, SWT.NONE);
@@ -79,5 +90,10 @@ public class Server {
 		DateTime dateTime = new DateTime(shell, SWT.BORDER);
 		dateTime.setBounds(280, 54, 80, 24);
 
+	}
+	
+	private void refreshList(){
+		list.removeAll();
+		
 	}
 }
