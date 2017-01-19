@@ -11,7 +11,6 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
 public class Server {
-	static Database dt = new Database();
 	protected Shell shell;
 
 	/**

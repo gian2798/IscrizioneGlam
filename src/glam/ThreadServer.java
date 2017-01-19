@@ -13,6 +13,7 @@ public class ThreadServer implements Runnable {
 	Server s;
 	ServerSocket server = null;
 	Socket client = null;
+	static Database dt = new Database();
 	public ThreadServer(Server server) {
 		// TODO Auto-generated constructor stub
 		s = server;
@@ -28,6 +29,7 @@ public class ThreadServer implements Runnable {
 				InputStreamReader isr = new InputStreamReader(clientSocket.getInputStream());
 				BufferedReader in = new BufferedReader(isr);
 				System.out.println("ho ricevuto: "+ in.readLine());
+				dt.inserisciIscrizione(in.readLine());
 				//connectionDatabase();
 			}
 		} catch (IOException e) {

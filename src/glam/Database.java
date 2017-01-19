@@ -22,7 +22,7 @@ public class Database {
 		} // fine try-catch
 
 		// Creo la connessione al database
-		cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/peer?glam=root&password=");
+		cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/glam?user=root&password=");
 		// peer è il nome del database
 
 		sql = "SELECT * FROM iscrizioni;";
@@ -40,6 +40,7 @@ public class Database {
 		} // fine try-catch
 		cn.close(); // chiusura connessione
 	}// fine main
+	
 	public void inserisciIscrizione(String s){
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -50,7 +51,7 @@ public class Database {
 
 		// Creo la connessione al database
 		try {
-			cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/peer?glam=root&password=");
+			cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/glam?user=root&password=");
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
