@@ -28,9 +28,9 @@ public class ThreadServer implements Runnable {
 				Socket clientSocket = server.accept(); // Accetta la connessione
 				InputStreamReader isr = new InputStreamReader(clientSocket.getInputStream());
 				BufferedReader in = new BufferedReader(isr);
-				System.out.println("ho ricevuto: "+ in.readLine());
-				dt.inserisciIscrizione(in.readLine());
-				//connectionDatabase();
+				String n = in.readLine();
+				dt.inserisciIscrizione(n);
+				
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

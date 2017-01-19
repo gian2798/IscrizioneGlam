@@ -89,7 +89,7 @@ public class Client {
 				if(text.getText()!=" " || text.getText()!=""){
 					String nome = text.getText();
 					out.println(nome);
-					
+					text.setText("");
 				}else{
 					JOptionPane.showMessageDialog(null, "errore, inserisci qualcosa", "errore", JOptionPane.ERROR_MESSAGE);;
 				}

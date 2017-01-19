@@ -32,7 +32,7 @@ public class Database {
 										// connessione
 			rs = st.executeQuery(sql); // faccio la query su uno statement
 			while (rs.next() == true) {
-				iscr = new Iscritto(rs.getString("nome") +"\t" + rs.getString("dataiscrizione"), null);
+				iscr = new Iscritto(rs.getString("nome") +"\t" + rs.getString("data_iscrizione"), null);
 				System.out.println(rs.getString("id") + "\t" + rs.getString("idTutor"));
 			}
 		} catch (SQLException e) {
@@ -52,26 +52,21 @@ public class Database {
 		// Creo la connessione al database
 		try {
 			cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/glam?user=root&password=");
+			sql = "INSERT INTO iscrizioni(nome,data_iscrizione) VALUES ('"+s+"', NOW())";
+			
+			// ________________________________query
+			System.out.println(sql);
+			st = cn.createStatement(); 
+			st.execute(sql); 
+			
+			cn.close();
+			
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		// peer è il nome del database
-
-		sql = "INSERT INTO iscrizioni(nome,dataiscrizione) VALUES ('"+s+"', NOW())";
-		// ________________________________query
-		try {
-			st = cn.createStatement(); // creo sempre uno statement sulla connessione
-			rs = st.executeQuery(sql); // faccio la query su uno statement
-		} catch (SQLException e) {
-			System.out.println("errore:" + e.getMessage());
-		} // fine try-catch
-		try {
-			cn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // chiusura connessione
+		
 	}
+
 }
 	
