@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import javax.swing.JOptionPane;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
@@ -21,7 +23,9 @@ public class Client {
 
 	protected Shell shell;
 	private Text text;
+	static Socket s;
 	
+	static PrintWriter out;
 	static InputStreamReader ISR = new InputStreamReader(System.in);
 	static BufferedReader BR = new BufferedReader(ISR);
 
@@ -33,8 +37,8 @@ public class Client {
 	 */
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		
-		Socket s =new Socket("localhost", 9999);
-		PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+		s = new Socket("localhost", 9999);
+		out = new PrintWriter(s.getOutputStream(), true);
 		
 		try {
 			Client window = new Client();
@@ -82,12 +86,12 @@ public class Client {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				
-				String nome = text.getText();
-				if(text.getText()!=" "){
-					nome= getInput();
+				if(text.getText()!=" " || text.getText()!=""){
+					String nome = text.getText();
+					out.println(nome);
 					
-					
-					
+				}else{
+					JOptionPane.showMessageDialog(null, "errore, inserisci qualcosa", "errore", JOptionPane.ERROR_MESSAGE);;
 				}
 			}
 		});

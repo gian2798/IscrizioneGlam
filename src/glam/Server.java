@@ -11,7 +11,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
 public class Server {
-
+	static Database dt = new Database();
 	protected Shell shell;
 
 	/**
@@ -71,6 +71,7 @@ public class Server {
 		btnFiltra.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				
 			}
 		});
 		btnFiltra.setBounds(285, 115, 75, 25);
