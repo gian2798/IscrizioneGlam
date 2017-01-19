@@ -30,11 +30,15 @@ public class ThreadServer implements Runnable {
 				Socket clientSocket = server.accept(); // Accetta la connessione
 				InputStreamReader isr = new InputStreamReader(clientSocket.getInputStream());
 				BufferedReader in = new BufferedReader(isr);
+
 				nome = in.readLine();
 				System.out.println("ho ricevuto: "+ nome);
 				dt.inserisciIscrizione(nome);
 				
-				//connectionDatabase();
+				//connectionDatabase(
+				
+				
+//github.com/gian2798/IscrizioneGlam
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
