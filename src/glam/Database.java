@@ -25,7 +25,7 @@ public class Database {
 		cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/glam?user=root&password=");
 		// peer è il nome del database
 
-		sql = "SELECT * FROM iscrizioni;";
+		sql = "SELECT nome FROM iscrizioni;";
 		// ________________________________query
 		try {
 			st = cn.createStatement(); // creo sempre uno statement sulla
@@ -33,7 +33,6 @@ public class Database {
 			rs = st.executeQuery(sql); // faccio la query su uno statement
 			while (rs.next() == true) {
 				iscr = new Iscritto(rs.getString("nome") +"\t" + rs.getString("data_iscrizione"), null);
-				System.out.println(rs.getString("id") + "\t" + rs.getString("idTutor"));
 			}
 		} catch (SQLException e) {
 			System.out.println("errore:" + e.getMessage());
@@ -58,7 +57,6 @@ public class Database {
 			System.out.println(sql);
 			st = cn.createStatement(); 
 			st.execute(sql); 
-			
 			cn.close();
 			
 		} catch (SQLException e1) {

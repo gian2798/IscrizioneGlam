@@ -35,10 +35,6 @@ public class ThreadServer implements Runnable {
 				System.out.println("ho ricevuto: "+ nome);
 				dt.inserisciIscrizione(nome);
 				
-				//connectionDatabase(
-				
-				
-//github.com/gian2798/IscrizioneGlam
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
