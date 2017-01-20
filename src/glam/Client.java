@@ -71,7 +71,7 @@ public class Client {
 	protected void createContents() {
 		shell = new Shell();
 		shell.setSize(268, 203);
-		shell.setText("SWT Application");
+		shell.setText("Client");
 		
 		text = new Text(shell, SWT.BORDER);
 		text.setBounds(10, 56, 76, 21);
@@ -81,27 +81,39 @@ public class Client {
 		lblNome.setBounds(10, 35, 76, 15);
 		lblNome.setText("Nome");
 		
+		Label lblRisultato = new Label(shell, SWT.NONE);
+		lblRisultato.setAlignment(SWT.CENTER);
+		lblRisultato.setBounds(109, 52, 133, 75);
+		lblRisultato.setText(" ");
+		
 		Button btnIscriviti = new Button(shell, SWT.NONE);
 		btnIscriviti.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				
-				if(text.getText()!=" " || text.getText()!=""){
+				int c=0;
+				if(text.getText()!=" " && text.getText()!=""){
 					String nome = text.getText();
 					out.println(nome);
 					text.setText("");
 				}else{
+					c=1;
 					JOptionPane.showMessageDialog(null, "errore, inserisci qualcosa", "errore", JOptionPane.ERROR_MESSAGE);;
+				}
+				if(c != 1){
+					try {
+						String risultato = BR.readLine();
+						lblRisultato.setText(risultato);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
 		btnIscriviti.setBounds(10, 102, 75, 25);
 		btnIscriviti.setText("Iscriviti");
 		
-		Label lblRisultato = new Label(shell, SWT.NONE);
-		lblRisultato.setAlignment(SWT.CENTER);
-		lblRisultato.setBounds(134, 20, 108, 107);
-		lblRisultato.setText(" ");
+		
 		
 	}
 	

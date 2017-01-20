@@ -16,6 +16,7 @@ import org.eclipse.swt.events.SelectionEvent;
 public class Server {
 	protected Shell shell;
 	private List list;
+	int ciaone;
 
 	/**
 	 * Launch the application.
@@ -34,11 +35,19 @@ public class Server {
 	 * Open the window.
 	 */
 	public void aggiornaLista(ArrayList<Iscritto> iscritti){
-		list.removeAll();
-		for(int i=0; i<iscritti.size(); i++){
-			list.add(iscritti.get(i).getNome());
-		}
-				
+		Display.getDefault().asyncExec( new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				list.removeAll();
+				for(int i=0; i<iscritti.size(); i++){
+					list.add(iscritti.get(i).getNome());
+				}
+			}
+			
+		});
+							
 	}
 	public void open() {
 		Display display = Display.getDefault();
@@ -73,27 +82,22 @@ public class Server {
 		lblFiltra.setBounds(295, 12, 55, 15);
 		lblFiltra.setText("Filtra:");
 		
-		ThreadServer ts = new ThreadServer(this);
-		Thread server = new Thread(ts);
-		server.start();
+		DateTime dateTime = new DateTime(shell, SWT.BORDER);
+		dateTime.setBounds(280, 54, 80, 24);
+
 		
 		Button btnFiltra = new Button(shell, SWT.NONE);
 		btnFiltra.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				DateTime date = dateTime;
 				
 			}
 		});
 		btnFiltra.setBounds(285, 115, 75, 25);
 		btnFiltra.setText("Filtra");
 		
-		DateTime dateTime = new DateTime(shell, SWT.BORDER);
-		dateTime.setBounds(280, 54, 80, 24);
-
-	}
-	
-	private void refreshList(){
-		list.removeAll();
 		
 	}
+	
 }
