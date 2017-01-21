@@ -76,7 +76,6 @@ public class ThreadServer implements Runnable {
 					dt.inserisciIscrizione(nome);
 					out.println("Inserito correttamente");
 					s.aggiornaLista(iscrittoServer);
-					
 				}
 				//fine controllo
 
