@@ -26,8 +26,8 @@ public class Client {
 	static Socket s;
 	
 	static PrintWriter out;
-	static InputStreamReader ISR = new InputStreamReader(System.in);
-	static BufferedReader BR = new BufferedReader(ISR);
+	static InputStreamReader ISR;
+	static BufferedReader BR;
 
 	/**
 	 * Launch the application.
@@ -89,6 +89,8 @@ public class Client {
 			public void widgetSelected(SelectionEvent e) {
 				try {
 					s = new Socket("localhost", 9999);
+					ISR = new InputStreamReader(s.getInputStream());
+					BR = new BufferedReader(ISR);
 					out = new PrintWriter(s.getOutputStream(), true);
 
 					

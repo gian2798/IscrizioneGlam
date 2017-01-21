@@ -1,7 +1,14 @@
 package glam;
 
 import java.sql.*;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
+import org.eclipse.swt.widgets.DateTime;
+
+import com.ibm.icu.text.SimpleDateFormat;
 
 public class Database {
 	static Connection cn;
@@ -30,8 +37,18 @@ public class Database {
 			st = cn.createStatement(); // creo sempre uno statement sulla
 										// connessione
 			rs = st.executeQuery(sql); // faccio la query su uno statement
-			while (rs.next() == true) {
-				iscr = new Iscritto(rs.getString("nome") +"\t" + rs.getString("data_iscrizione"), null);
+			while (rs.next() == true) {	
+				//DateTime date = DateTime.parse(rs.getString("data_iscrizione"), DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss"));
+				
+				try {
+					Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALIAN).parse(rs.getString("data_iscrizione"));
+					System.out.println(date.toString());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				iscr = new Iscritto(rs.getString("nome"), date);
 				iscritto.add(iscr);
 				System.out.print("fatto");
 			}

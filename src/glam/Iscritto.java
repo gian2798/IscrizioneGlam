@@ -10,7 +10,7 @@ public class Iscritto {
 		// TODO Auto-generated constructor stub
 		nome = n;
 		giorno = d;
-		
+		System.out.println(nome);
 	}
 
 	public String getNome() {
