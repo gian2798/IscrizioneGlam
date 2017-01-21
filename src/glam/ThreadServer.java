@@ -57,21 +57,20 @@ public class ThreadServer implements Runnable {
 				System.out.println(iscrittoServer.size());
 				if(iscrittoServer.size()!=0){
 					
-				for(int i = 0; i< iscrittoServer.size(); i++){
-					if(nome == iscrittoServer.get(i).getNome()){
-						out.println("c'è già");
-						controllo=1;
-						break;
-					}else{
-						controllo = 0;
+					for(int i = 0; i< iscrittoServer.size(); i++){
+						if(nome.equals(iscrittoServer.get(i).getNome())){
+							out.println("c'è già");
+							controllo=1;
+							break;
+						}else{
+							controllo = 0;
+						}
 					}
-					
-				}
-				if(controllo == 0){
-					dt.inserisciIscrizione(nome);
-					s.aggiornaLista(iscrittoServer);
-					out.println("Inserito correttamente");
-				}
+					if(controllo == 0){
+						dt.inserisciIscrizione(nome);
+						s.aggiornaLista(iscrittoServer);
+						out.println("Inserito correttamente");
+					}
 				}else{
 					dt.inserisciIscrizione(nome);
 					out.println("Inserito correttamente");

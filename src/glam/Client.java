@@ -37,8 +37,6 @@ public class Client {
 	 */
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		
-		s = new Socket("localhost", 9999);
-		out = new PrintWriter(s.getOutputStream(), true);
 		
 		try {
 			Client window = new Client();
@@ -47,7 +45,6 @@ public class Client {
 			e.printStackTrace();
 		}
 		
-		s.close();
 	}
 
 	/**
@@ -90,24 +87,30 @@ public class Client {
 		btnIscriviti.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				int c=0;
-				if(text.getText()!=" " && text.getText()!=""){
-					String nome = text.getText();
-					out.println(nome);
-					text.setText("");
-				}else{
-					c=1;
-					JOptionPane.showMessageDialog(null, "errore, inserisci qualcosa", "errore", JOptionPane.ERROR_MESSAGE);;
-				}
-				if(c != 1){
-					try {
+				try {
+					s = new Socket("localhost", 9999);
+					out = new PrintWriter(s.getOutputStream(), true);
+
+					
+					int c=0;
+					if(text.getText()!=" " && text.getText()!=""){
+						String nome = text.getText();
+						out.println(nome);
+						text.setText("");
+					}else{
+						c=1;
+						JOptionPane.showMessageDialog(null, "errore, inserisci qualcosa", "errore", JOptionPane.ERROR_MESSAGE);;
+					}
+					if(c != 1){
 						String risultato = BR.readLine();
 						lblRisultato.setText(risultato);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					}
+					s.close();
+				} catch (IOException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
 				}
+				
 			}
 		});
 		btnIscriviti.setBounds(10, 102, 75, 25);
