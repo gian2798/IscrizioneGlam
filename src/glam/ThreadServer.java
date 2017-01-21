@@ -23,6 +23,15 @@ public class ThreadServer implements Runnable {
 		// TODO Auto-generated constructor stub
 		s = server;
 		
+		try {
+			dt.Database();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		iscrittoServer = dt.getIscritto();
+		s.aggiornaLista(iscrittoServer);
+		
 	}
 	
 	@Override
@@ -38,15 +47,6 @@ public class ThreadServer implements Runnable {
 				BufferedReader in = new BufferedReader(isr);
 				PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true);
 				
-				try {
-					dt.Database();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				iscrittoServer = dt.getIscritto();
-				s.aggiornaLista(iscrittoServer);
-				
 				//connessione col database
 				
 				
@@ -59,7 +59,7 @@ public class ThreadServer implements Runnable {
 					
 				for(int i = 0; i< iscrittoServer.size(); i++){
 					if(nome == iscrittoServer.get(i).getNome()){
-						//s.setRisultato("c'è già");
+						out.println("c'è già");
 						controllo=1;
 						break;
 					}else{
@@ -74,7 +74,7 @@ public class ThreadServer implements Runnable {
 				}
 				}else{
 					dt.inserisciIscrizione(nome);
-					//s.setRisultato("Inserito correttamente");
+					out.println("Inserito correttamente");
 					s.aggiornaLista(iscrittoServer);
 					
 				}
