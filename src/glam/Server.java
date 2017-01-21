@@ -84,7 +84,10 @@ public class Server {
 		
 		DateTime dateTime = new DateTime(shell, SWT.BORDER);
 		dateTime.setBounds(280, 54, 80, 24);
-
+		
+		ThreadServer ts = new ThreadServer(this);
+		Thread server = new Thread(ts);
+		server.start();
 		
 		Button btnFiltra = new Button(shell, SWT.NONE);
 		btnFiltra.addSelectionListener(new SelectionAdapter() {
