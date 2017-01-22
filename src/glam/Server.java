@@ -75,7 +75,7 @@ public class Server {
 	protected void createContents() {
 		shell = new Shell();
 		shell.setSize(450, 300);
-		shell.setText("SWT Application");
+		shell.setText("Iscrizioni");
 		
 		list = new List(shell, SWT.BORDER);
 		list.setBounds(10, 33, 189, 219);
