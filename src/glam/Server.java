@@ -114,6 +114,7 @@ public class Server {
 				date = cal.getTime();
 				
 				//confronto
+				
 				array = ThreadServer.getIscrittoServer();
 				list.removeAll();
 				for(int i = 0 ;i < array.size();i++){
