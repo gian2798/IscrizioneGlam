@@ -68,11 +68,23 @@ public class ThreadServer implements Runnable {
 					}
 					if(controllo == 0){
 						dt.inserisciIscrizione(nome);
+						try {
+							dt.Database();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						s.aggiornaLista(iscrittoServer);
 						out.println("Inserito correttamente");
 					}
 				}else{
 					dt.inserisciIscrizione(nome);
+					try {
+						dt.Database();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					out.println("Inserito correttamente");
 					s.aggiornaLista(iscrittoServer);
 				}
@@ -85,4 +97,11 @@ public class ThreadServer implements Runnable {
 		}
 		
 	}
+
+	public static ArrayList<Iscritto> getIscrittoServer() {
+		return iscrittoServer;
+	}
+
+	
+
 }

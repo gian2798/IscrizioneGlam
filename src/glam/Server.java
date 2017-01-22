@@ -2,9 +2,16 @@ package glam;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+
+import com.ibm.icu.util.Calendar;
+
 import org.eclipse.swt.widgets.List;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
@@ -17,6 +24,7 @@ public class Server {
 	protected Shell shell;
 	private List list;
 	int ciaone;
+	ArrayList<Iscritto> array;
 
 	/**
 	 * Launch the application.
@@ -93,7 +101,26 @@ public class Server {
 		btnFiltra.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				DateTime date = dateTime;
+				//set della dat
+				Date date = new Date();
+				int gg = dateTime.getDay();
+				int mm = dateTime.getMonth();
+				int yy = dateTime.getYear();
+				Calendar cal = Calendar.getInstance();
+				cal.set(yy, mm, gg);
+				cal.set(Calendar.HOUR_OF_DAY,0);
+				cal.set(Calendar.MINUTE,0);
+				cal.set(Calendar.SECOND,0);
+				date = cal.getTime();
+				
+				//confronto
+				array = ThreadServer.getIscrittoServer();
+				list.removeAll();
+				for(int i = 0 ;i < array.size();i++){
+					if(array.get(i).getGiorno().after(date)){
+						list.add(array.get(i).getNome());
+					}
+				}
 				
 			}
 		});

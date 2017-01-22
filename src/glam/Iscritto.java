@@ -1,15 +1,15 @@
 package glam;
 
-import org.eclipse.swt.widgets.DateTime;
+import java.util.Date;
 
 public class Iscritto {
 	private String nome;
-	private DateTime giorno;
+	private Date giorno;
 	
-	public Iscritto(String n,DateTime d) {
+	public Iscritto(String n,java.util.Date giorno2) {
 		// TODO Auto-generated constructor stub
 		nome = n;
-		giorno = d;
+		giorno = (Date) giorno2;
 		System.out.println(nome);
 	}
 
@@ -21,11 +21,11 @@ public class Iscritto {
 		this.nome = nome;
 	}
 
-	public DateTime getGiorno() {
+	public Date getGiorno() {
 		return giorno;
 	}
 
-	public void setGiorno(DateTime giorno) {
+	public void setGiorno(Date giorno) {
 		this.giorno = giorno;
 	}
 	

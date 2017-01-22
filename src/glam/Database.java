@@ -39,18 +39,20 @@ public class Database {
 			rs = st.executeQuery(sql); // faccio la query su uno statement
 			while (rs.next() == true) {	
 				//DateTime date = DateTime.parse(rs.getString("data_iscrizione"), DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss"));
-				
+				Date giorno = new Date();
 				try {
+					
 					Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ITALIAN).parse(rs.getString("data_iscrizione"));
-					System.out.println(date.toString());
+					giorno = date;
+					
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
-				iscr = new Iscritto(rs.getString("nome"), date);
+				iscr = new Iscritto(rs.getString("nome"), giorno);
 				iscritto.add(iscr);
-				System.out.print("fatto");
+				//System.out.print("fatto");
 			}
 		} catch (SQLException e) {
 			System.out.println("errore:" + e.getMessage());
